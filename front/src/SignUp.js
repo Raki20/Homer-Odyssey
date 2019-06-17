@@ -4,19 +4,36 @@ class SignUp extends Component {
     constructor (props) {
         super(props);
         this.state = {
-            email: ''
+            email: '',
+            password: '',
+            firstname: '',
+            lastname:'',
         };
     }
 
     handleChange = (event) => {
-        this.setState({ value: event.target.email });
+        this.setState({ 
+            [event.target.name] : event.target.value 
+        });
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(JSON.stringify(this.state));
     }
 
     render () {
         return (
             <div>
-                <h1>{this.state.email}</h1>
-                <input type="email" name="email" onChange={this.handleChange} />
+                <h1>{JSON.stringify(this.state)}</h1>
+                <form onSubmit={this.handleSubmit}>
+                    <input type="email" name="email" placeholder="Email" onChange={this.handleChange} />
+                    <input type="password" name="password" placeholder="Your Password" onChange={this.handleChange} />
+                    <input type="password" name="password" placeholder="Verify Password" onChange={this.handleChange} />
+                    <input type="firstname" name="firstname" placeholder="First Name" onChange={this.handleChange} />
+                    <input type="lastname" name="lastname" placeholder="Last Name" onChange={this.handleChange}/>
+                    <input type="submit" value="Submit"/>
+                </form>
             </div>
         );
     }
