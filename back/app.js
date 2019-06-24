@@ -8,6 +8,9 @@ const  app  =  express();
 
 const authRouter = require('./routes/auth/auth');
 
+//connects the database
+const connection = require('./helpers/db');
+
 // I set up the application
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended:  false }));
