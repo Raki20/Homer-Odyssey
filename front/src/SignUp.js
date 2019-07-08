@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
+import { Link } from "react-router-dom";
 
 class SignUp extends Component {
     constructor (props) {
@@ -82,8 +83,11 @@ class SignUp extends Component {
                     <TextField type="password" name="password" placeholder="Verify Password" onChange={this.handleChange} />
                     <TextField type="name" name="name" placeholder="First Name" onChange={this.handleChange} />
                     <TextField type="lastname" name="lastname" placeholder="Last Name" onChange={this.handleChange}/>
+                   <Link to="/">
                     <Button type="submit" value="submit" variant="contained" color="secondary">Submit</Button>
+                   </Link>
                 </form>
+                <Link to="/signin">Sign In</Link>
             </div>
         );
     }

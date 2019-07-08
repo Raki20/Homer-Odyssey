@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
+import { Link } from "react-router-dom";
 
-class SignUp extends Component {
+class SignIn extends Component {
     constructor (props) {
         super(props);
         this.state = {
@@ -60,11 +60,14 @@ class SignUp extends Component {
                 <form action="POST" onSubmit={this.handleSubmit}>
                     <TextField type="email" name="email" placeholder="Email" onChange={this.handleChange} />
                     <TextField type="password" name="password" placeholder="Your Password" onChange={this.handleChange} />
-                    <Button type="submit" value="submit" variant="contained" color="secondary"></Button>
+                    <Link to="/profile">
+                        <Button type="submit" value="submit" variant="contained" color="secondary">Sign In</Button>
+                    </Link>
                 </form>
+                <Link to="/signup">Sign Up</Link>
             </div>
         );
     }
 }
 
-export default SignUp;
+export default SignIn;
