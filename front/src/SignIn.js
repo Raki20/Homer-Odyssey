@@ -1,20 +1,14 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Snackbar from '@material-ui/core/Snackbar';
 import { Link } from "react-router-dom";
 
-class SignUp extends Component {
+class SignIn extends Component {
     constructor (props) {
         super(props);
         this.state = {
             email: '',
             password: '',
-            verificationPassword: '',
-            name: '',
-            lastname:'',
-            flash: '',
-            submitted: false
         }
     }
 
@@ -22,13 +16,6 @@ class SignUp extends Component {
         this.setState({[e.target.name]: e.target.value});
     }
 
-    flashColor = () => {
-        this.state.flash === "User has been signed up!" ? this.setState({
-            backgroundColor: 'green'
-        }) : this.setState({
-            backgroundColor: 'red'
-            }) 
-        }
     handleChange = (event) => {
         this.setState({ 
             [event.target.name] : event.target.value 
@@ -36,7 +23,7 @@ class SignUp extends Component {
     }
 
     handleSubmit = (event) => {
-        fetch("/auth/signup",
+        fetch("/auth/signin",
         {
             method:  'POST',
             headers:  new Headers({
@@ -55,42 +42,32 @@ class SignUp extends Component {
                 submitted: true
             })
             )
-            console.log(`form submited: ${JSON.stringify(this.state)}`);
+            console.log(`user signed in: ${JSON.stringify(this.state)}`);
             event.preventDefault();
     }
-
-    handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        this.setState({submitted: false});
-    };
 
     render () {
         return (
             <div>
-                <h1>Sign Up</h1>
-                <div className={this.state.flash === "User has been signed up!" ? 'green' : 'red'}></div>
-                <Snackbar 
+                <h1>Sign In</h1>
+                <div className={this.state.flash === "User has been signed in!" ? 'green' : 'red'}></div>
+                {/* <Snackbar 
                     open={this.state.submitted}
                     autoHideDuration={6000}
                     onClose={this.handleClose}
                     message={<p>{this.state.flash}</p>}
-                />
+                /> */}
                 <form action="POST" onSubmit={this.handleSubmit}>
                     <TextField type="email" name="email" placeholder="Email" onChange={this.handleChange} />
                     <TextField type="password" name="password" placeholder="Your Password" onChange={this.handleChange} />
-                    <TextField type="password" name="password" placeholder="Verify Password" onChange={this.handleChange} />
-                    <TextField type="name" name="name" placeholder="First Name" onChange={this.handleChange} />
-                    <TextField type="lastname" name="lastname" placeholder="Last Name" onChange={this.handleChange}/>
-                   <Link to="/">
-                    <Button type="submit" value="submit" variant="contained" color="secondary">Submit</Button>
-                   </Link>
+                    <Link to="/profile">
+                        <Button type="submit" value="submit" variant="contained" color="secondary">Sign In</Button>
+                    </Link>
                 </form>
-                <Link to="/signin">Sign In</Link>
+                <Link to="/signup">Sign Up</Link>
             </div>
         );
     }
 }
 
-export default SignUp;
+export default SignIn;

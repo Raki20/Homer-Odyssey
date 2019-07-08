@@ -8,6 +8,9 @@ const  app  =  express();
 
 const authRouter = require('./routes/auth/auth');
 
+//connects the database
+const connection = require('./helpers/db');
+
 // I set up the application
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended:  false }));
@@ -30,7 +33,7 @@ app.use(function(req, res, next) {
 });
 
 //I launch the node server
-let  server  =  app.listen( process.env.PORT  ||  3000, function(){
+let  server  =  app.listen( process.env.PORT  ||  5000, function(){
     console.log('Listening on port '  +  server.address().port);
 });
 
